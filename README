@@ -1,0 +1,4 @@
+This is a simple web gui implement of mlocate, It is written with python, I only
+used web.py. I believe it't easy to use ,you just need to run "python
+weblocate.py",then it will run.
+If you have any question, please mail lvdachao@gmail.com
