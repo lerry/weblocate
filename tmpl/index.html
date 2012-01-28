@@ -1,31 +1,38 @@
-$def with(keyword,length,results)
+$def with(keyword,length,results,recent)
+$code
+    if recent:
+        recent = ['最近搜索：']+recent
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<title>WebLocate</title>
     <style type="text/css">
-        html{ 
-            text-align: center;} 
+        html{
+            text-align: center;}
         body{width:960px;
             margin: 0px auto;}
         h2 {text-align: center;}
         h3 {text-align: right;}
         hr {color: #000; }
-        #result {text-align: left;
+        .main {text-align: left;
                 margin-left: 20px;}
     </style>
 </head>
 <body>
-    <h2>WebLocate</h1>
+    <h2><a href='/'>WebLocate</a></h1>
     <h3>Based on mlocate by: Lerry</h3>
     <hr />
     <div id="search">
         <form action="/" method="post">
         <input type="search" name="keyword" value="$keyword">
         <input type="submit">
-    </div>    
-    <div id="result">
+    </div>
+	<div class="main">
+			$for i in recent:
+			    <p>$i</p>
+	</div>
+	<div class="main">
         <p>$length</p>
         $for result in results:
         <p><a href="/get$result">$result</a></p>
