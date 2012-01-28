@@ -45,17 +45,17 @@ class index:
 
 class get:
     def GET(self, url):
-        if not url.split('/')[1] in ['lib','root']:
-            try:
-                f = open(url,'rb').read()
-                #web.header('Content-type','application/octet-stream')
-               # web.header('Transfer-Encoding','chunked')
-                return f#url.encode('utf-8')
-            except:
-                return '文件读取失败'
-        else:
-            return '文件禁止访问'
-        #print '^-^'
+        #print url.encode('utf-8')
+        client_ip = web.ctx.ip
+        #check ip, if not trustable,it can only just get files in some path
+        if client_ip  in ['127.0.0.1','localhost'] or url.startswith(('/home')):
+            if not url.split('/')[1] in ['lib','root']:
+                try:
+                    f = open(url,'rb').read()
+                    return f
+                except:
+                    return '文件读取失败'
+        return '文件禁止访问'
 
 def webheader():
     web.header('Content-Type', 'text/html')
