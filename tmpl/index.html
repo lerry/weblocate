@@ -1,7 +1,10 @@
-$def with(keyword,length,results,recent)
+$def with(keyword,length,results,location,recent)
 $code
     if recent:
         recent = ['最近搜索：']+recent
+    if location:
+        location = '/'+location
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,22 +23,23 @@ $code
     </style>
 </head>
 <body>
-    <h2><a href='/'>WebLocate</a></h1>
+    <h2><a href='$location'>WebLocate</a></h1>
+    <!--<span><a href="/">Return back</a></span>-->
     <h3>Based on mlocate by: Lerry</h3>
     <hr />
     <div id="search">
-        <form action="/" method="post">
+        <form action="$location/" method="post">
         <input type="search" name="keyword" value="$keyword">
         <input type="submit">
     </div>
-	<div class="main">
-			$for i in recent:
-			    <p>$i</p>
-	</div>
-	<div class="main">
+    <div class="main">
+        $for i in recent:
+        <p>$i</p>
+    </div>
+    <div class="main">
         <p>$length</p>
         $for result in results:
-        <p><a href="/get$result">$result</a></p>
+        <p><a href="$location/get$result">$result</a></p>
     </div>
 </body>
 </html>
